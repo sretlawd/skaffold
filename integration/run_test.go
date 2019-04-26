@@ -106,7 +106,7 @@ func TestRun(t *testing.T) {
 			remoteOnly:  true,
 		}, {
 			description: "custom builder",
-			dir:         "examples/custom",
+			dir:         "testdata/examples/custom",
 			pods:        []string{"bazel"},
 		},
 	}
