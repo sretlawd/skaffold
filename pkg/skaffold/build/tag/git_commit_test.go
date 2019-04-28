@@ -243,6 +243,23 @@ func TestGitCommit_GenerateFullyQualifiedImageName(t *testing.T) {
 			subDir: "artifact1",
 		},
 		{
+			description:            "additional commit in parent artifact",
+			variantTags:            "test:c0abf4f",
+			variantCommitSha:       "test:49cc839ce5a69b46f7df6eadc8c89b7a754df2a1",
+			variantAbbrevCommitSha: "test:49cc839",
+			createGitRepo: func(dir string) {
+				gitInit(t, dir).
+					write("source.go", []byte("code")).
+					mkdir("artifact1").write("artifact1/source.go", []byte("other code")).
+					add("source.go", "artifact1/source.go").
+					commit("initial").
+					write("source.go", []byte("updated code")).
+					add("source.go").
+					commit("update parent artifact")
+			},
+			subDir: "artifact1",
+		},
+		{
 			description:            "non git repo",
 			variantTags:            "test:dirty",
 			variantCommitSha:       "test:dirty",

@@ -94,6 +94,7 @@ func (c *GitCommit) makeGitTag(workingDir string) (string, error) {
 		if c.variant == abbrevCommitSha {
 			args = append(args, "--abbrev-commit")
 		}
+		args = append(args, "--", ".")
 	default:
 		return "", errors.New("invalid git tag variant: defaulting to 'dirty'")
 	}
